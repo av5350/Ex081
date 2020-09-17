@@ -21,14 +21,14 @@
         <Space
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="5" />
+            android:layout_weight="3" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="7"
             android:gravity="center|right"
-            android:text="סדרה הנדסית" />
+            android:text="Geometric sequence" />
 
         <Space
             android:layout_width="0dp"
@@ -52,12 +52,12 @@
             android:layout_height="match_parent"
             android:layout_weight="7"
             android:gravity="center|left"
-            android:text="סדרה חשבונית" />
+            android:text="Arithmetic sequence" />
 
         <Space
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="5" />
+            android:layout_weight="3" />
     </LinearLayout>
 
     <Space
@@ -96,7 +96,7 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:ems="10"
-            android:inputType="numberSigned" />
+            android:inputType="numberSigned|numberDecimal" />
 
         <Space
             android:layout_width="0dp"
@@ -132,7 +132,7 @@
         <Space
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="0.5" />
 
         <EditText
             android:id="@+id/editTextNumberSigned2"
@@ -140,7 +140,7 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:ems="10"
-            android:inputType="numberSigned" />
+            android:inputType="numberSigned|numberDecimal" />
 
         <Space
             android:layout_width="0dp"
