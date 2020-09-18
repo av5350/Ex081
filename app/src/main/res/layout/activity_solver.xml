@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E8B0B0"
     android:orientation="vertical"
     tools:context=".SolverActivity">
 
@@ -24,6 +25,7 @@
             android:layout_weight="1" />
 
         <ListView
+            android:id="@+id/sequenceList"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="5">
@@ -47,12 +49,13 @@
                 android:layout_weight="2" />
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/firstNum"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="4"
                 android:gravity="center|left"
-                android:text="TextView" />
+                android:text="X1 ="
+                android:textColor="#F4511E" />
 
             <Space
                 android:layout_width="match_parent"
@@ -60,12 +63,13 @@
                 android:layout_weight="2" />
 
             <TextView
-                android:id="@+id/textView7"
+                android:id="@+id/sequenceD"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="4"
                 android:gravity="center|left"
-                android:text="TextView" />
+                android:text="D ="
+                android:textColor="#F4511E" />
 
             <Space
                 android:layout_width="match_parent"
@@ -73,12 +77,13 @@
                 android:layout_weight="2" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/itemPlace"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="4"
                 android:gravity="center|left"
-                android:text="TextView" />
+                android:text="n ="
+                android:textColor="#F4511E" />
 
             <Space
                 android:layout_width="match_parent"
@@ -86,18 +91,24 @@
                 android:layout_weight="2" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/sumN"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="4"
                 android:gravity="center|left"
-                android:text="TextView" />
+                android:text="Sn ="
+                android:textColor="#F4511E" />
 
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="2" />
         </LinearLayout>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
 
     </LinearLayout>
 
@@ -121,7 +132,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3"
-            android:background="#FFFFFF"
+            android:background="#E8B0B0"
+            android:onClick="returnMain"
             app:srcCompat="@drawable/return_btn" />
 
         <Space
