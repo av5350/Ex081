@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SolverActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     Intent gi;
@@ -22,9 +23,7 @@ public class SolverActivity extends AppCompatActivity implements AdapterView.OnI
 
     boolean sequenceType;
 
-    double valueInSequence, sumInSequence;
-
-    String[] sequence = new String[20];
+    String[] sequenceArr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,26 +37,18 @@ public class SolverActivity extends AppCompatActivity implements AdapterView.OnI
 
         sequenceList = (ListView)findViewById(R.id.sequenceList);
 
+        sequenceArr = new String[20];
+
         gi = getIntent();
         sequenceType = gi.getBooleanExtra("sequenceType", false);
         firstNumber = gi.getFloatExtra("firstNum", 0);
         numD = gi.getFloatExtra("sequenceD", 0);
 
         // fix the firstNumber value(without 0.0)
-        if ((float)((int)firstNumber) == firstNumber) {
-            firstNum.setText("X1 = " + (int)firstNumber);
-        }
-        else {
-            firstNum.setText("X1 = " + firstNumber);
-        }
+        firstNum.setText("X1 = " + fixValue(firstNumber));
 
         // fix the numD value(without 0.0)
-        if ((float)((int)numD) == numD) {
-            sequenceD.setText("D = " + (int)numD);
-        }
-        else {
-            sequenceD.setText("D = " + numD);
-        }
+        sequenceD.setText("D = " + fixValue(numD));
 
         // Arithmetic sequence (true)
         if (sequenceType){
@@ -72,7 +63,7 @@ public class SolverActivity extends AppCompatActivity implements AdapterView.OnI
         sequenceList.setOnItemClickListener(this);
 
         ArrayAdapter<String> adp = new ArrayAdapter<String>(this,
-                R.layout.support_simple_spinner_dropdown_item, sequence);
+                R.layout.support_simple_spinner_dropdown_item, sequenceArr);
         sequenceList.setAdapter(adp);
     }
 
@@ -83,38 +74,23 @@ public class SolverActivity extends AppCompatActivity implements AdapterView.OnI
     public void calculateGeometricArray(){
         for (int i = 0; i < 20; i++){
             // calculate the number
-            valueInSequence = firstNumber + Math.pow(numD, i);
-            fixArrayValue(i);
+            sequenceArr[i] = fixValue((float) (firstNumber * Math.pow(numD, i)));
         }
     }
 
     public void calculateArithmeticArray(){
         for (int i = 0; i < 20; i++){
             // calculate the number
-            valueInSequence = firstNumber + i * numD;
-            fixArrayValue(i);
+            sequenceArr[i] = fixValue(firstNumber + i * numD);
         }
     }
 
-    public void fixArrayValue(int i){
-        // fix the sequence[i] value (without 0.0)
-        if ((float)((int)valueInSequence) == valueInSequence) {
-            sequence[i] = String.valueOf((int)valueInSequence);
+    public String fixValue(float value){
+        // fix the value (without 0.0)
+        if ((float)((int)value) == value) {
+            return String.valueOf((int)value);
         }
-        else {
-            sequence[i] = String.valueOf(valueInSequence);
-        }
-    }
-
-    public void fixSumValue()
-    {
-        // fix the sum value (without 0.0)
-        if ((float)((int)sumInSequence) == sumInSequence) {
-            sumN.setText("Sn = " + (int)sumInSequence);
-        }
-        else {
-            sumN.setText("Sn = " + sumInSequence);
-        }
+        return String.valueOf(value);
     }
 
     @Override
@@ -123,13 +99,11 @@ public class SolverActivity extends AppCompatActivity implements AdapterView.OnI
 
         // Arithmetic sequence (true)
         if (sequenceType){
-            sumInSequence = ((position + 1) * (2 * firstNumber + numD * (position))) / 2;
-            fixSumValue();
+            sumN.setText("Sn = " + fixValue(((position + 1) * (2 * firstNumber + numD * (position))) / 2));
         }
         // Geometric sequence (false)
         else {
-            sumInSequence = (firstNumber * (Math.pow(numD, (position + 1)) - 1) / numD - 1);
-            fixSumValue();
+            sumN.setText("Sn = " + fixValue((float) ((firstNumber * (Math.pow(numD, (position + 1)) - 1)) / (numD - 1))));
         }
     }
 }

@@ -16,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
 
     EditText firstNum, sequenceD;
 
+    String firstValue, stringD;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,10 +32,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goSolver(View view) {
-        String firstValue = firstNum.getText().toString();
-        String stringD = sequenceD.getText().toString();
+        firstValue = firstNum.getText().toString();
+        stringD = sequenceD.getText().toString();
 
-        if (!firstValue.equals("") && !stringD.equals(""))
+        if (!firstValue.equals("") && !stringD.equals("")
+            && !firstValue.equals(".") && !stringD.equals(".")
+            && !firstValue.equals("-") && !stringD.equals("-"))
         {
             // is it Arithmetic sequence (true)
             // or Geometric sequence (false)
@@ -45,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(si);
         }
         else {
-            Toast.makeText(this, "You have to enter values", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Error! You have to enter values", Toast.LENGTH_SHORT).show();
         }
     }
 }
