@@ -99,11 +99,14 @@ public class SolverActivity extends AppCompatActivity implements AdapterView.OnI
 
         // Arithmetic sequence (true)
         if (sequenceType){
+            // Calculate sum with formula.
             sumN.setText("Sn = " + fixValue(((position + 1) * (2 * firstNumber + numD * (position))) / 2));
         }
         // Geometric sequence (false)
         else {
-            sumN.setText("Sn = " + fixValue((float) ((firstNumber * (Math.pow(numD, (position + 1)) - 1)) / (numD - 1))));
+            // Calculate sum with formula.
+            sumN.setText("Sn = " + fixValue(
+                    (float) ((firstNumber * (Math.pow(numD, (position + 1)) - 1)) / (numD - 1))));
         }
     }
 }
