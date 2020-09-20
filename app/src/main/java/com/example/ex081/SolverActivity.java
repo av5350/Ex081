@@ -86,6 +86,10 @@ public class SolverActivity extends AppCompatActivity implements AdapterView.OnI
     }
 
     public String fixValue(float value){
+        // if value has nan value (like div in 0)
+        // show another msg instead of
+        if (Float.isNaN(value))
+            return "No ans";
         // fix the value (without 0.0)
         if ((float)((int)value) == value) {
             return String.valueOf((int)value);
