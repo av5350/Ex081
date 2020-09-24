@@ -37,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
 
         if (!firstValue.equals("") && !stringD.equals("")
             && !firstValue.equals(".") && !stringD.equals(".")
-            && !firstValue.equals("-") && !stringD.equals("-"))
+            && !firstValue.equals("-") && !stringD.equals("-")
+            && !firstValue.equals("-.") && !stringD.equals("-."))
         {
             // is it Arithmetic sequence (true)
             // or Geometric sequence (false)

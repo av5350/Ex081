@@ -19,11 +19,13 @@ public class SolverActivity extends AppCompatActivity implements AdapterView.OnI
 
     ListView sequenceList;
 
-    float firstNumber, numD;
+    float firstNumber, numD, sequenceSum;
 
     boolean sequenceType;
 
     String[] sequenceArr;
+
+    float[] sumValuesArr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +39,9 @@ public class SolverActivity extends AppCompatActivity implements AdapterView.OnI
 
         sequenceList = (ListView)findViewById(R.id.sequenceList);
 
+        sequenceSum = 0;
         sequenceArr = new String[20];
+        sumValuesArr = new float[20];
 
         gi = getIntent();
         sequenceType = gi.getBooleanExtra("sequenceType", false);
@@ -50,14 +54,7 @@ public class SolverActivity extends AppCompatActivity implements AdapterView.OnI
         // fix the numD value(without 0.0)
         sequenceD.setText("D = " + fixValue(numD));
 
-        // Arithmetic sequence (true)
-        if (sequenceType){
-            calculateArithmeticArray();
-        }
-        // Geometric sequence (false)
-        else {
-            calculateGeometricArray();
-        }
+        calculateArrValues();
 
         sequenceList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         sequenceList.setOnItemClickListener(this);
@@ -71,25 +68,23 @@ public class SolverActivity extends AppCompatActivity implements AdapterView.OnI
         finish();
     }
 
-    public void calculateGeometricArray(){
+    public void calculateArrValues(){
         for (int i = 0; i < 20; i++){
-            // calculate the number
-            sequenceArr[i] = fixValue((float) (firstNumber * Math.pow(numD, i)));
-        }
-    }
-
-    public void calculateArithmeticArray(){
-        for (int i = 0; i < 20; i++){
-            // calculate the number
-            sequenceArr[i] = fixValue(firstNumber + i * numD);
+            // Arithmetic sequence (true)
+            if (sequenceType){
+                sequenceArr[i] = fixValue(firstNumber + i * numD);
+            }
+            // Geometric sequence (false)
+            else {
+                sequenceArr[i] = fixValue((float) (firstNumber * Math.pow(numD, i)));
+            }
+            // create the sum until now's sequence value
+            sequenceSum += Float.parseFloat(sequenceArr[i]);
+            sumValuesArr[i] = sequenceSum;
         }
     }
 
     public String fixValue(float value){
-        // if value has nan value (like div in 0)
-        // show another msg instead of
-        if (Float.isNaN(value))
-            return "No ans";
         // fix the value (without 0.0)
         if ((float)((int)value) == value) {
             return String.valueOf((int)value);
@@ -99,18 +94,7 @@ public class SolverActivity extends AppCompatActivity implements AdapterView.OnI
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        itemPlace.setText("n = " + position);
-
-        // Arithmetic sequence (true)
-        if (sequenceType){
-            // Calculate sum with formula.
-            sumN.setText("Sn = " + fixValue(((position + 1) * (2 * firstNumber + numD * (position))) / 2));
-        }
-        // Geometric sequence (false)
-        else {
-            // Calculate sum with formula.
-            sumN.setText("Sn = " + fixValue(
-                    (float) ((firstNumber * (Math.pow(numD, (position + 1)) - 1)) / (numD - 1))));
-        }
+        itemPlace.setText("n = " + (position + 1));
+        sumN.setText("Sn = " + fixValue(sumValuesArr[position]));
     }
 }
