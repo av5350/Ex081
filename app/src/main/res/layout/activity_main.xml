@@ -157,7 +157,7 @@
     <ImageButton
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="4"
+        android:layout_weight="5"
         android:background="#E8B0B0"
         android:onClick="goSolver"
         app:srcCompat="@drawable/move_window_btn" />
